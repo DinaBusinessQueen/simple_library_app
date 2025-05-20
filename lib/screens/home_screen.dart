@@ -1,7 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:simple_library_app/services/google_books_api.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  late final _bookProvider = Provider.of<GoogleBooksApi>(
+    context,
+    listen: false,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +52,9 @@ class HomeScreen extends StatelessWidget {
                     color: Color.fromARGB(255, 3, 131, 29),
                   ),
                   onPressed: () {
-                    // TODO: Сделать логику поиска книг
+                    _bookProvider.search(
+                      '',
+                    ); // TODO: Передать текст из TextField
                   },
                 ),
               ),

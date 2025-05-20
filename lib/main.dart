@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:simple_library_app/constants/app_constants.dart';
+import 'package:simple_library_app/services/google_books_api.dart';
 
 import 'screens/home_screen.dart';
 
@@ -8,15 +10,18 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: AppConstants.appName,
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: const HomeScreen(),
+    return MultiProvider(
+      providers: [ChangeNotifierProvider(create: (_) => GoogleBooksApi())],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: AppConstants.appName,
+        theme: ThemeData(primarySwatch: Colors.blue),
+        home: const HomeScreen(),
+      ),
     );
   }
 }
