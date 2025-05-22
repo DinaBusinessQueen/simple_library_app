@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_library_app/constants/app_constants.dart';
+import 'package:simple_library_app/screens/book_details_page.dart';
 import '../services/google_books_api.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -148,15 +149,13 @@ class _HomeScreenState extends State<HomeScreen> {
                               ],
                             ),
                             onTap: () {
-                              // TODO: Navigate to book details
-                              /*
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => BookDetails(book: book),
-                                  ),
-                                );
-                                */
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder:
+                                      (context) => BookDetailsPage(book: book),
+                                ),
+                              );
                             },
                           ),
                         );
