@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:simple_library_app/constants/app_constants.dart';
 import 'package:simple_library_app/screens/book_details_page.dart';
 import '../services/google_books_api.dart';
+import '../models/book.dart';
+import '../widgets/bookmark_button.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -35,18 +37,20 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text(AppConstants.appName, style: TextStyle(fontSize: 25)),
+        title: const Text(
+          AppConstants.appName,
+          style: TextStyle(fontSize: 25, color: Colors.white),
+        ),
         backgroundColor: Colors.green[700],
         toolbarHeight: 70,
         elevation: 5,
         shadowColor: Colors.green[700],
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       ),
       body: Column(
         children: [
-          const SizedBox(width: 10),
+          const SizedBox(width: 20),
           Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(20.0),
             child: TextField(
               controller: searchController,
               decoration: InputDecoration(
@@ -147,6 +151,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                     style: const TextStyle(fontSize: 12),
                                   ),
                               ],
+                            ),
+                            trailing: BookmarkButton(
+                              book: Book.fromGoogleBooksApi(book),
+                              size: 20,
                             ),
                             onTap: () {
                               Navigator.push(

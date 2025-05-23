@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../models/book.dart';
+import '../widgets/bookmark_button.dart';
 
 class BookDetailsPage extends StatelessWidget {
   final Map book;
@@ -38,8 +40,19 @@ class BookDetailsPage extends StatelessWidget {
 
     final buyLink = volumeInfo['infoLink'];
 
+    // Convert the raw book data to a Book model for the bookmark button
+    final bookModel = Book.fromGoogleBooksApi(book);
+
     return Scaffold(
-      appBar: AppBar(title: Text(volumeInfo['title'] ?? 'No Title')),
+      appBar: AppBar(
+        title: Text(volumeInfo['title'] ?? 'No Title'),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 16.0),
+            child: BookmarkButton(book: bookModel, size: 28),
+          ),
+        ],
+      ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
