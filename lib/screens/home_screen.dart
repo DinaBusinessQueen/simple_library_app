@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_library_app/constants/app_constants.dart';
 import 'package:simple_library_app/screens/book_details_page.dart';
+import 'package:simple_library_app/screens/favorites_screen.dart';
 import '../services/google_books_api.dart';
 import '../models/book.dart';
 import '../widgets/bookmark_button.dart';
@@ -45,10 +46,24 @@ class _HomeScreenState extends State<HomeScreen> {
         toolbarHeight: 70,
         elevation: 5,
         shadowColor: Colors.green[700],
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.bookmark, color: Colors.white),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const FavoritesScreen(),
+                ),
+              );
+            },
+            tooltip: 'Избранные книги',
+          ),
+        ],
       ),
       body: Column(
         children: [
-          const SizedBox(width: 20),
+          const SizedBox(height: 20),
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: TextField(
